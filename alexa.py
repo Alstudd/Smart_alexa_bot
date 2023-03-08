@@ -30,22 +30,19 @@ def take_command():
 def run_alexa():
     command = take_command()
     print(command)
-    if 'play' in command:
-        song = command.replace('play', '')
+    if 'time' in user_input:
+        time = datetime.datetime.now().strftime('%I:%M %p')
+        talk('Current time is ' + time)
+        print(time)
+    elif 'play' in user_input:
+        song = user_input.replace('play', '')
         talk('playing ' + song)
         pywhatkit.playonyt(song)
-    elif 'time' in command:
-        time = datetime.datetime.now().strftime('%I:%M %p')
-        print(time)
-        talk('Current time is ' + time)
-    elif 'who is' in command:
-        person = command.replace('who is', '')
-        info = wikipedia.summary(person, 1)
+    elif ('who is' in user_input) or ('what is' in user_input) or ('where' in user_input):
+        person = user_input.replace('who is', '')
+        info = wikipedia.summary(person, 2)
         print(info)
         talk(info)
-    elif 'date' in command:
-        talk('sorry, I have a headache')
-        print('sorry, I have a headache')
     elif 'are you single' in command:
         talk('I am in a relationship with wifi')
         print('I am in a relationship with wifi')
